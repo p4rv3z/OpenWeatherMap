@@ -5,19 +5,20 @@
     android:background="@drawable/rounded_corner">
 
     <LinearLayout
-        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <LinearLayout
+            android:background="#f5f3f3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp"
             android:weightSum="100">
 
             <TextView
+                android:padding="5dp"
                 android:id="@+id/weather_item_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
                 android:text="@string/demo_temp" />
 
             <TextView
+                android:padding="5dp"
                 android:id="@+id/weather_item_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -46,6 +48,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
+                android:scaleX="3"
+                android:scaleY="3"
                 android:src="@drawable/ic_weather" />
 
             <LinearLayout

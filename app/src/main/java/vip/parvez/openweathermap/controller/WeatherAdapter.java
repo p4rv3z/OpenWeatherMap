@@ -41,8 +41,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         viewHolder.tvDate.setText(weather.getDate() + "");
         viewHolder.tvTime.setText(weather.getTime() + "");
         viewHolder.tvTemp.setText(weather.getTemperature() + "");
-        viewHolder.tvMinTemp.setText("Min. Temp: " + weather.getMinTemperature() + "");
-        viewHolder.tvMaxTemp.setText("Max. Temp: " + weather.getMaxTemperature() + "");
+        viewHolder.tvMinTemp.setText("Min. Temp: " + weather.getMinTemperature() + V.DEGREE);
+        viewHolder.tvMaxTemp.setText("Max. Temp: " + weather.getMaxTemperature() + V.DEGREE);
         viewHolder.tvHumidity.setText(weather.getHumidity() + "");
         try {
             Picasso.with(context)

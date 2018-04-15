@@ -6,4 +6,5 @@ public class V {
     public static final String APP_ID = "b826580e5d44867a15f9b5785539972c";//your app id
     public static final String UNITS = "metric";
     public static final String ICON_FORMAT = ".png";
+    public static final String DEGREE = "\u00b0";
 }
