@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Open Weather Map</string>
+    <string name="demo_temp">30</string>
+    <string name="temp">Temperature</string>
+    <string name="demo_min_temp">Minimum Temperature</string>
+    <string name="demo_max_temp">Maximum Temperature</string>
+    <string name="demo_pressure">Pressure</string>
+    <string name="demo_humidity">Humidity</string>
+    <string name="demo_rain">Rain</string>
+    <string name="demo_wind_speed">Wind Speed</string>
+    <string name="demo_wind_degree">Wind Degree</string>
+    <string name="demo_weather_status">Weather Status</string>
+</resources>
