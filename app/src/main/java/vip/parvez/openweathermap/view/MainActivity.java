@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSpinner();
 
-
     }
 
     private void init() {
@@ -111,67 +110,75 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                     try {
-                        //all data
+                        //get all json object data
                         JSONObject data = new JSONObject(response.body().string());
-                        MyServices.log("ALL DATA: " + data.toString());
+                        //MyServices.log("ALL DATA: " + data.toString());
+
                         //status code
                         String code = data.getString("cod");
-                        MyServices.log("CODE: " + code);
-                        //message
-                        String message = data.getString("message");
-                        MyServices.log("MESSAGE: " + message);
+                        //MyServices.log("CODE: " + code);
 
-                        //total report count
-                        String cnt = data.getString("cnt");
-                        MyServices.log("COUNT: " + cnt);
+                        if (code == "200") {
 
-                        //city info
-                        JSONObject city = data.getJSONObject("city");
-                        MyServices.log("CITY: " + city);
+                            //message
+                            //String message = data.getString("message");
+                            //MyServices.log("MESSAGE: " + message);
 
-                        //LAT LON
-                        JSONObject coord = city.getJSONObject("coord");
-                        MyServices.log("LAT LON: " + coord);
-                        MyServices.log("LAT: " + coord.getString("lat"));
-                        MyServices.log("LON: " + coord.getString("lon"));
+                            //total report count
+                            //String cnt = data.getString("cnt");
+                            //MyServices.log("COUNT: " + cnt);
 
-                        //get reports
-                        JSONArray forecastList = data.getJSONArray("list");//.getJSONObject(0);
-                        MyServices.log("FORECASTLIST: " + forecastList);
+                            //city info
+                            //JSONObject city = data.getJSONObject("city");
+                            //MyServices.log("CITY: " + city);
+
+                            //LAT LON
+                            //JSONObject coord = city.getJSONObject("coord");
+                            //MyServices.log("LAT LON: " + coord);
+                            //MyServices.log("LAT: " + coord.getString("lat"));
+                            //MyServices.log("LON: " + coord.getString("lon"));
+
+                            //get reports
+                            JSONArray forecastList = data.getJSONArray("list");//.getJSONObject(0);
+                            MyServices.log("FORECASTLIST: " + forecastList);
 
 
-                        ArrayList<Weather> weatherList = JsonArray.toWeather(forecastList);
-                        Weather currentWeather = weatherList.get(0);
-                        tvTemperature.setText(currentWeather.getTemperature() + "");
-                        tvMinTemperature.setText(currentWeather.getMinTemperature() + "");
-                        tvMaxTemperature.setText(currentWeather.getMaxTemperature() + "");
-                        tvWeatherStatus.setText(currentWeather.getWeatherDescription() + "");
-                        tvHumidity.setText(currentWeather.getHumidity() + "");
-                        tvPressure.setText(currentWeather.getPressure() + "");
-                        tvRain.setText(currentWeather.getRain() + "");
-                        tvWindSpeed.setText(currentWeather.getWindSpeed() + "");
-                        tvWindDegree.setText(currentWeather.getWindDeg() + "");
-                        try {
-                            Picasso.with(getApplicationContext())
-                                    .load(V.ICON_BASE_URL + currentWeather.getWeatherIcon() + V.ICON_FORMAT)
+                            ArrayList<Weather> weatherList = JsonArray.toWeather(forecastList);
+                            Weather currentWeather = weatherList.get(0);
+                            tvTemperature.setText(currentWeather.getTemperature() + "");
+                            tvMinTemperature.setText(currentWeather.getMinTemperature() + "");
+                            tvMaxTemperature.setText(currentWeather.getMaxTemperature() + "");
+                            tvWeatherStatus.setText(currentWeather.getWeatherDescription() + "");
+                            tvHumidity.setText(currentWeather.getHumidity() + "");
+                            tvPressure.setText(currentWeather.getPressure() + "");
+                            tvRain.setText(currentWeather.getRain() + "");
+                            tvWindSpeed.setText(currentWeather.getWindSpeed() + "");
+                            tvWindDegree.setText(currentWeather.getWindDeg() + "");
+                            try {
+                                Picasso.with(getApplicationContext())
+                                        .load(V.ICON_BASE_URL + currentWeather.getWeatherIcon() + V.ICON_FORMAT)
 //                                    .resize(200, 200)
-                                    .into(ivIcon);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        if (weatherList.size() > 0) {
-                            weatherAdapter = new WeatherAdapter(weatherList, getApplicationContext());
-                            recyclerView.setAdapter(weatherAdapter);
-                        }
-                        MyServices.log("WEATHER 0: " + weatherList.get(0).toString());
-                        String value = "";
-                        for (Weather weather : weatherList) {
-                            value += "Date: " + weather.getDate() + "\n";
-                            value += "Date Txt: " + weather.getDtTxt() + "\n";
-                            value += "Time: " + weather.getTime() + "\n";
-                            value += "Temperature: " + weather.getTemperature() + "\n";
-                            value += "Icon: " + V.ICON_BASE_URL + weather.getWeatherIcon() + V.ICON_FORMAT + "\n";
-                            value += "=====================\n";
+                                        .into(ivIcon);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            if (weatherList.size() > 0) {
+                                weatherAdapter = new WeatherAdapter(weatherList, getApplicationContext());
+                                recyclerView.setAdapter(weatherAdapter);
+                            }
+//                            MyServices.log("WEATHER 0: " + weatherList.get(0).toString());
+//                            String value = "";
+//                            for (Weather weather : weatherList) {
+//                                value += "Date: " + weather.getDate() + "\n";
+//                                value += "Date Txt: " + weather.getDtTxt() + "\n";
+//                                value += "Time: " + weather.getTime() + "\n";
+//                                value += "Temperature: " + weather.getTemperature() + "\n";
+//                                value += "Icon: " + V.ICON_BASE_URL + weather.getWeatherIcon() + V.ICON_FORMAT + "\n";
+//                                value += "=====================\n";
+//                            }
+                        } else {
+                            MyServices.alertDialog(getApplicationContext(), "Connection. Please try again after sometime.");
+
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
